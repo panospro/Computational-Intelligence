@@ -1,21 +1,42 @@
-clc
-clear;
-close all
+% clc
+% clear;
+% close all
 
-fis = readfis("initial.fis");
+fis = readfis("finalfis.fis");
 theta = 0; 
 u = 0.05;
 pos = [4 0.4];
 final_pos = [10 3.2];
 
-for k = 1 : 100
-    dh = sensor_h(pos);
-    dv = sensor_v(pos);
-    disp(dh)
+k = 1;
+while pos(k, 1) < 10
+    dh = dh_calculate(pos(k,:));
+    dv = dv_calculate(pos(k,:));
+    [dtheta, ~, ~, ~, ~] = evalfis(fis, [dh theta dv]);
     disp(dv)
-    [dtheta, ~, ~, ~, ~] = evalfis(fis, [dh dv theta]);
+    disp(dh)
     theta = theta + dtheta;
-    pos(k+1, :) = pos(k, :) + 10 * u * [cosd( theta ) sind( theta )];
+    pos(k+1, :) = pos(k, :) + u * [cosd( theta ) sind( theta )];
+    k = k + 1;
 end
 
-disp(pos)
+figure();
+hold on;
+axis([0 10.5 0 4]);
+
+% Shaded areas with gray color
+fill([5 5 6 6], [0 1 1 0], [0.8 0.8 0.8]); 
+fill([6 6 7 7], [0 2 2 0], [0.8 0.8 0.8]);
+fill([7 7 10 10], [0 3 3 0], [0.8 0.8 0.8]);
+
+% Plot the current position of the car, update the figure window every 0.1 sec
+for k = 1:size(pos, 1)
+    plot(pos(k, 1), pos(k, 2), 'ko', 'MarkerSize', 5, 'MarkerFaceColor', 'b');
+    drawnow;
+    pause(0.01);
+end
+
+xlabel('x');
+ylabel('y');
+title('Real-time Plot with Car Movement, changes fis, with theta = 0');
+hold off;
