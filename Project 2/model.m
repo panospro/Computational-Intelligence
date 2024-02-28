@@ -15,8 +15,7 @@ for theta = thetaArray(1,:)
         dh = dh_calculate(pos(k,:));
         dv = dv_calculate(pos(k,:));
         [dtheta, ~, ~, ~, ~] = evalfis(fis, [dh theta dv]);
-        disp(dv)
-        disp(dh)
+
         theta = theta + dtheta;
         pos(k+1, :) = pos(k, :) + u * [cosd( theta ) sind( theta )];
         k = k + 1;
