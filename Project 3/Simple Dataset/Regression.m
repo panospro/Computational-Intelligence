@@ -15,11 +15,6 @@ epoch = 100;
 
 for i = 1:size(configs, 1)
     tic;
-    resultsFolderPath = ['../../../results/Project3/Model_', num2str(i)];
-    if ~exist(resultsFolderPath, 'dir')
-        mkdir(resultsFolderPath);
-    end
-    
     numMFs = configs{i, 1};
     outputType = configs{i, 2};
     
@@ -31,6 +26,11 @@ for i = 1:size(configs, 1)
 
     % Evaluate the valFis model on test data
     Y = evalfis(tstData(:,1:end-1), valFis);
+    
+    resultsFolderPath = ['../../../results/Project3/Model_', num2str(i)];
+    if ~exist(resultsFolderPath, 'dir')
+        mkdir(resultsFolderPath);
+    end
     
     % Plot MFs, learning curve, and the errors of the model
     plotMFs(inFIS, trnData, valFis, resultsFolderPath);
