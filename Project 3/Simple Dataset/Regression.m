@@ -5,7 +5,7 @@
 clear; clc; close all;
 
 % Initialize variables
-data = load('../Datasets/airfoil_self_noise.dat');
+data = load('../airfoil_self_noise.dat');
 preproc = 1;
 configs = {2, 'constant'; 3, 'constant'; 2, 'linear'; 3, 'linear'};
 epoch = 100;
