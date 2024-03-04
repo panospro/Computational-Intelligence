@@ -11,6 +11,7 @@ function plotDataGrids(grid, plotType, titleText, labels, fileName, resultsFolde
                 xticklabels(labels.r);
                 legend([labels.features{i} ' features']);
             end
+            sgtitle(titleText);
 
         case '3D'
             bar3(grid);
@@ -25,10 +26,9 @@ function plotDataGrids(grid, plotType, titleText, labels, fileName, resultsFolde
             else
                 zlabel(labels.zlabel);
             end
-            
+            title(titleText);
     end
 
-    title(titleText);
     saveas(gcf, fullfile(resultsFolderPath, fileName));
     close(gcf);
 end
