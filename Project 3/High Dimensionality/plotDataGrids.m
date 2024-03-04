@@ -18,7 +18,14 @@ function plotDataGrids(grid, plotType, titleText, labels, fileName, resultsFolde
             yticklabels(labels.features);
             xlabel('R');
             xticklabels(labels.r);
-            zlabel(labels.zlabel);
+            
+            % Just a patch to not give an extra argument
+            if titleText == "Error for different number of features and r values in 3D"
+                zlabel('Mean Square Error');
+            else
+                zlabel(labels.zlabel);
+            end
+            
     end
 
     title(titleText);

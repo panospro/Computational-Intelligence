@@ -5,8 +5,8 @@ end
 
 function plotAndSaveMFs(fis, titleName, trnData, resultsFolderPath)
     figure();
-    numInputs = size(trnData, 2) - 1;
-    for i = 1:numInputs
+    k = size(trnData, 2) - 1;
+    for i = 1:k
         subplot(3, 2, i);
         plotmf(fis, 'input', i);
         grid on;
