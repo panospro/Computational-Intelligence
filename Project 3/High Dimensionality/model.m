@@ -28,5 +28,5 @@ addpath('../Simple Dataset');
 analyzeResults(init_fis, valFis, trainError, valError, test_data_x, test_data_y, resultsFolderPath);
 toc;
 
-% RMSE = 14.306453 MSE = 204.674588 R^2 = 0.823694 NMSE = 0.176264 NDEI = 0.419838
-% Elapsed time is 747.080691 seconds.
+% RMSE = 13.835028 MSE = 191.407992 R^2 = 0.836962 NMSE = 0.162999 NDEI = 0.403732
+% Elapsed time is 880.356354 seconds.
