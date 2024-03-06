@@ -1,12 +1,13 @@
 % Protopsaltis Panagiotis 9847
+% Independent Model
 clear; clc; close all;
 tic;
 
 % Initialize variables
+addpath('../../Project 3/Simple Dataset');
 data=load('../haberman.data');
 preproc = 1;
 Rs = [0.2 0.8];
-addpath('../../Project 3/Simple Dataset');
 
 for i = 1:length(Rs)
     resultsFolderPath = ['../../../results/Project4/Model', num2str(i)]
