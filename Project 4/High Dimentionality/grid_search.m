@@ -9,7 +9,7 @@ resultsFolderPath = '../../../results/Project4/GridSeach';
 %data=removevars(data,{'Var1'});
 data.Var1 = [];
 data= table2array(data);
-Rs = [0.2 0.4 0.7 1]; % radius values
+Rs = [0.2 0.4 0.7 0.9]; % radius values
 NumberOfFeatures = [5 10 15 20];
 preproc=1;
 
@@ -66,7 +66,7 @@ for f = 1 : length(NumberOfFeatures)
             % Tune the fis
             fprintf('\n *** Tuning the FIS\n');
          
-            anfis_opt = anfisOptions('InitialFIS', init_fis, 'EpochNumber', 50, 'DisplayANumberOfFeaturesISInformation', 0, 'DisplayErrorValues', 0, 'DisplayStepSize', 0, 'DisplayFinalResults', 0, 'ValidationData', [validation_data_x validation_data_y]);
+            anfis_opt = anfisOptions('InitialFIS', init_fis, 'EpochNumber', 50, 'ValidationData', [validation_data_x validation_data_y]);
          
             [trn_fis, trainError, stepSize, init_fis, chkError] = anfis([training_data_x training_data_y], anfis_opt);
          
@@ -111,28 +111,28 @@ subplot(2,2,1);
 bar(error_mse_grid(1,:))
 xlabel('R values');
 ylabel('Mean Square Error');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 legend('5 features')
 
 subplot(2,2,2);
 bar(error_mse_grid(2,:));
 xlabel('R values');
 ylabel('Mean Square Error');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 legend('10 features')
 
 subplot(2,2,3);
 bar(error_mse_grid(3,:));
 xlabel('R values');
 ylabel('Mean Square Error');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 legend('15 features')
 
 subplot(2,2,4);
 bar(error_mse_grid(4,:));
 xlabel('R values');
 ylabel('Mean Square Error');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 legend('20 features')
 saveas(gcf, fullfile(resultsFolderPath, '1.png'));
 
@@ -141,7 +141,7 @@ bar3(error_mse_grid);
 ylabel('Number of features');
 yticklabels({'5','10','15','20'});
 xlabel('R values');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 zlabel('Mean square error');
 title('MSE differences with changed features and R');
 saveas(gcf, fullfile(resultsFolderPath, '2.png'));
@@ -151,7 +151,7 @@ bar3(error_cross_grid);
 ylabel('Number of features');
 yticklabels({'5','10','15','20'});
 xlabel('R values');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 zlabel('Mean square error');
 title('ERROR differences with changed features and R');
 saveas(gcf, fullfile(resultsFolderPath, '3.png'));
@@ -161,7 +161,7 @@ bar3(accuracy_grid);
 ylabel('Number of features');
 yticklabels({'5','10','15','20'});
 xlabel('R values');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 zlabel('Cross entropy error');
 title('Accuracy differences with changed features and R');
 saveas(gcf, fullfile(resultsFolderPath, '4.png'));
@@ -171,11 +171,11 @@ bar3(rule_grid);
 ylabel('Number of features');
 yticklabels({'5','10','15','20'});
 xlabel('R values');
-xticklabels({'0.2','0.4','0.7','1'});
+xticklabels({'0.2','0.4','0.7','0.9'});
 zlabel('Number of rules created');
 title('Rules for features and R');
 saveas(gcf, fullfile(resultsFolderPath, '5.png'));
 
 toc
 
-%% Elapsed time is 1310.083562 seconds.
+% Elapsed time is 817.996942 seconds.
