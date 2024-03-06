@@ -1,4 +1,4 @@
-function plotLearningCurve(trnError, valError, resultsFolderPath)
+function plotLearningCurve(trnError, valError, resultsFolderPath, i)
     figure();
     plot([trnError valError], 'LineWidth', 2); 
     grid on;
@@ -6,6 +6,6 @@ function plotLearningCurve(trnError, valError, resultsFolderPath)
     ylabel('Error');
     legend('Training Error', 'Validation Error');
     title('Learning Curve');
-    saveas(gcf, fullfile(resultsFolderPath, 'Learning_Curve.png'))
+    saveas(gcf, fullfile(resultsFolderPath, [num2str(i), '_Learning_Curve.png']))
     close(gcf);
 end

@@ -1,9 +1,9 @@
-function plotMFs(Model, trnData, valFis, resultsFolderPath)
-    plotAndSaveMFs(Model, 'before training', trnData, resultsFolderPath);
-    plotAndSaveMFs(valFis, 'after training', trnData, resultsFolderPath);
+function plotMFs(Model, trnData, valFis, resultsFolderPath, i)
+    plotAndSaveMFs(Model, 'before training', trnData, resultsFolderPath, i);
+    plotAndSaveMFs(valFis, 'after training', trnData, resultsFolderPath, i);
 end
 
-function plotAndSaveMFs(fis, titleName, trnData, resultsFolderPath)
+function plotAndSaveMFs(fis, titleName, trnData, resultsFolderPath, numberOfModel)
     figure();
     k = size(trnData, 2) - 1;
     for i = 1:k
@@ -12,7 +12,7 @@ function plotAndSaveMFs(fis, titleName, trnData, resultsFolderPath)
         grid on;
     end
     sgtitle(['MFs ', titleName]);
-    saveFigurePath = fullfile(resultsFolderPath, ['MFs_', titleName, '.png']);
+    saveFigurePath = fullfile(resultsFolderPath, [num2str(numberOfModel), '_MFs_', titleName, '.png']);
     saveas(gcf, saveFigurePath);
     close(gcf);
 end
