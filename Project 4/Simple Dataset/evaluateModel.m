@@ -21,8 +21,8 @@ function [overallAccuracy, producersAccuracy, usersAccuracy, kHat] = calculateMe
     N = sum(errorMatrix, 'all');
     overallAccuracy = sum(diag(errorMatrix)) / N;
 
-    producersAccuracy = diag(errorMatrix)' ./ sum(errorMatrix, 1)
-    usersAccuracy = diag(errorMatrix)' ./ sum(errorMatrix, 2)'
+    producersAccuracy = diag(errorMatrix)' ./ sum(errorMatrix, 1);
+    usersAccuracy = diag(errorMatrix)' ./ sum(errorMatrix, 2)';
 
     p1 = sum(errorMatrix(1, :)) * sum(errorMatrix(:, 1)) / N ^ 2;
     p2 = sum(errorMatrix(2, :)) * sum(errorMatrix(:, 2)) / N ^ 2;
