@@ -12,13 +12,13 @@ resultsFolderPath = '../../../results/Project4/Model';
 
 for i = 1 : length(Rs)    
     % Split data and train anfis
-    [trnData,valData,tstData] = split_scale(data,preproc);
+    [trnData, valData, tstData] = split_scale(data, preproc);
     options = genfisOptions('SubtractiveClustering', 'ClusterInfluenceRange', Rs(i)); 
-    model = genfis(trnData(:,1:end-1), trnData(:,end), options, 'constant'); 
-    [trnFis,trnError,~,valFis,valError] = anfis(trnData,model,[50 0 0.01 0.9 1.1],[],valData);
+    model = genfis(trnData(:, 1:end-1), trnData(:,end), options, 'constant'); 
+    [~,trnError,~,valFis,valError] = anfis(trnData, model, [50 0 0.01 0.9 1.1], [], valData);
     
     % Create the plots
-    createPlots([resultsFolderPath, num2str(i+2)], trnError, valError, model, valFis, trnData)
+    createPlots([resultsFolderPath, num2str(i)], trnError, valError, model, valFis, trnData)
 
     % Evaluate the model
     evaluateModel(tstData, valFis);
