@@ -5,29 +5,29 @@ tic;
 
 % Initialize variables
 addpath('../../Project 3/Simple Dataset');
-data=load('../haberman.data');
-Acc=zeros(2,1);
-preproc=1;
+data = load('../haberman.data');
+Acc = zeros(2,1);
+preproc = 1;
 Rs = [0.2 0.8];
 
 for i = 1:length(Rs)
     resultsFolderPath = ['../../../results/Project4/Model', num2str(i + 2)];
 
     % Split data
-    [trnData, chkData, tstData]=split_scale(data,preproc);
+    [trnData, chkData, tstData] = split_scale(data,preproc);
     
     %%Clustering Per Class
-    [c1,sig1]=subclust(trnData(trnData(:,end)==1,:),Rs(i));
-    [c2,sig2]=subclust(trnData(trnData(:,end)==2,:),Rs(i));
-    num_rules=size(c1,1)+size(c2,1);
+    [c1,sig1] = subclust(trnData(trnData(:,end)==1,:),Rs(i));
+    [c2,sig2] = subclust(trnData(trnData(:,end)==2,:),Rs(i));
+    num_rules = size(c1,1)+size(c2,1);
     
     %Build FIS From Scratch
-    fis=newfis('FIS_SC','sugeno');
+    fis = newfis('FIS_SC','sugeno');
     
     %Add Input-Output Variables
     names_in = {'in1','in2','in3'};
     for i=1:size(trnData,2)-1
-        fis=addInput(fis, [0 1], 'Name', names_in{i});
+        fis = addInput(fis, [0 1], 'Name', names_in{i});
     end
     fis=addOutput(fis, [0 1], 'Name', 'out1');
     
@@ -52,10 +52,10 @@ for i = 1:length(Rs)
     %Add FIS Rule Base
     ruleList=zeros(num_rules,size(trnData,2));
     for i=1:size(ruleList,1)
-        ruleList(i,:)=i;
+        ruleList(i,:) = i;
     end
-    ruleList=[ruleList ones(num_rules,2)];
-    fis=addrule(fis,ruleList);
+    ruleList = [ruleList ones(num_rules,2)];
+    fis = addrule(fis,ruleList);
     
     anfisOpt = anfisOptions('InitialFIS', fis, 'EpochNumber', 50, 'ValidationData', chkData);
     [trnFis,trnError,~,valFis,valError] = anfis(trnData, anfisOpt);
@@ -65,10 +65,10 @@ for i = 1:length(Rs)
     createPlots(resultsFolderPath, trnError, valError, fis, valFis, trnData)
     
     %evaluation of model
-    Y=evalfis(tstData(:,1:end-1),valFis);
-    Y=round(Y);
+    Y = evalfis(tstData(:,1:end-1),valFis);
+    Y = round(Y);
     
-    for i=1:length(Y)
+    for i = 1:length(Y)
         if Y(i) > 2
             Y(i) = 2;
         end
@@ -77,8 +77,8 @@ for i = 1:length(Rs)
         end
     end
     
-    diff=tstData(:,end)-Y;
-    Acc=(length(diff)-nnz(diff))/length(Y)*100;
+    diff = tstData(:,end)-Y;
+    Acc = (length(diff)-nnz(diff))/length(Y)*100;
         
     %% Error Matrix
     error_matrix = confusionmat(tstData(:,end), Y);
