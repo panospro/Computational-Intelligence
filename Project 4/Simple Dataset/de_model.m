@@ -8,7 +8,7 @@ addpath('../../Project 3/Simple Dataset');
 data = load('../haberman.data');
 preproc = 1;
 Rs = [0.2 0.8];
-resultsFolderPath = '../../../results/Project5/Model';
+resultsFolderPath = '../../../results/Project4/Model';
 
 for i = 1:length(Rs)
     % Split data

@@ -4,7 +4,7 @@ clear; clc; close all;
 tic;
 
 % Initialize variables
-addpath('../../Project4/Simple Dataset');
+addpath('../../Project 3/Simple Dataset');
 data = load('../haberman.data');
 preproc = 1;
 Rs = [0.2 0.8];
