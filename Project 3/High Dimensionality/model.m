@@ -2,8 +2,6 @@
 % Regression with TSK models using UCI Superconductivity dataset
 clear; clc; close all; tic;
 
-% clearvars -except ranks weights
-
 % Initialize variables
 data=load('../superconduct.csv');
 preproc=1;
