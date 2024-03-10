@@ -22,7 +22,8 @@ end
 
 function plotMFs(model, trnData, title, resultsFolderPath, fileName)
     figure();
-
+    % Change it to 6 for the final classifier
+    % for i=1:6
     for i=1:size(trnData, 2) - 1
         subplot(3,2,i);
         plotmf(model,'input',i); 
